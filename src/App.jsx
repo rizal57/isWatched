@@ -60,18 +60,18 @@ export default function App() {
   const [query, setQuery] = useState('');
 
   return (
-    <div className="p-2 h-screen">
+    <div className="p-2 h-screen max-w-5xl mx-auto">
       <Navbar>
         <Search query={query} setQuery={setQuery} />
         <NumResults movies={tempMovieData} />
       </Navbar>
-      <main className="h-[calc(100vh-100px)]">
+      <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">
         <Box>
           <WatchedSummary movies={tempWatchedData} />
           <WatchedMovieLists movies={tempWatchedData} />
         </Box>
 
-        <Box height="h-[calc(100vh-300px)]">
+        <Box height="h-[calc(100vh-300px)] sm:h-[calc(100vh-100px)]">
           <MovieList movies={tempMovieData} />
         </Box>
       </main>

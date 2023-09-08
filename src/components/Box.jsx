@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 export default function Box(props) {
-  const { children, height = 'h-[calc(100vh-400px)]' } = props;
+  const {
+    children,
+    height = 'h-[calc(100vh-400px)] sm:h-[calc(100vh-100px)]',
+  } = props;
 
   const [showBox, setShowBox] = useState(true);
 
