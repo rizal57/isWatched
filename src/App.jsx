@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import {
   Box,
+  ErrorMessage,
+  Loader,
   MovieList,
   Navbar,
   NumResults,
@@ -8,6 +10,7 @@ import {
   WatchedMovieLists,
   WatchedSummary,
 } from './components';
+import { useEffect } from 'react';
 
 const tempMovieData = [
   {
@@ -56,23 +59,64 @@ const tempWatchedData = [
   },
 ];
 
+const KEY = 'f6db18';
+
 export default function App() {
   const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState(tempWatchedData);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function getMovies() {
+      try {
+        setIsLoading(true);
+        setError('');
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+        );
+        const data = await res.json();
+
+        if (data.Response === 'False') throw new Error(data.Error);
+
+        setMovies(data.Search);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (query.length < 3) {
+      setMovies([]);
+      setError('');
+      return;
+    }
+
+    getMovies();
+  }, [query]);
 
   return (
     <div className="p-2 h-screen max-w-5xl mx-auto">
       <Navbar>
         <Search query={query} setQuery={setQuery} />
-        <NumResults movies={tempMovieData} />
+        <NumResults movies={movies} />
       </Navbar>
       <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">
         <Box>
-          <WatchedSummary movies={tempWatchedData} />
-          <WatchedMovieLists movies={tempWatchedData} />
+          <WatchedSummary movies={watched} />
+          <WatchedMovieLists movies={watched} />
         </Box>
 
         <Box height="h-[calc(100vh-300px)] sm:h-[calc(100vh-100px)]">
-          <MovieList movies={tempMovieData} />
+          {isLoading ? (
+            <Loader />
+          ) : error ? (
+            <ErrorMessage message={error} />
+          ) : (
+            <MovieList movies={movies} />
+          )}
         </Box>
       </main>
     </div>

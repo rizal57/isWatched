@@ -1,7 +1,6 @@
 export default function Search({ query, setQuery }) {
-  console.log(query);
   return (
-    <div className="sm:w-[40%]">
+    <div className="sm:w-[40%] w-[50%]">
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}

@@ -6,6 +6,8 @@ import MovieList from './MovieList';
 import Logo from './Logo';
 import NumResults from './NumResults';
 import Search from './Search';
+import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
 
 export {
   Navbar,
@@ -16,4 +18,6 @@ export {
   Logo,
   NumResults,
   Search,
+  Loader,
+  ErrorMessage,
 };
