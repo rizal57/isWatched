@@ -1,4 +1,10 @@
-import { Box, Navbar, WatchedMovieLists, WatchedSummary } from './components';
+import {
+  Box,
+  MovieList,
+  Navbar,
+  WatchedMovieLists,
+  WatchedSummary,
+} from './components';
 
 const tempMovieData = [
   {
@@ -58,7 +64,7 @@ export default function App() {
         </Box>
 
         <Box height="h-[calc(100vh-300px)]">
-          <div>Tes list movie here</div>
+          <MovieList movies={tempMovieData} />
         </Box>
       </main>
     </div>

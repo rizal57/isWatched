@@ -1,10 +1,10 @@
 export default function WatchedSummary() {
   return (
-    <div className="bg-slate-100 shadow-md p-2 sticky top-0">
-      <h2 className="font-semibold text-slate-900 text-[1rem]">
+    <div className="bg-gray shadow-md p-2">
+      <h2 className="font-semibold text-black text-[1rem]">
         MOVIES YOU WATCHED
       </h2>
-      <div className="flex items-center gap-4 text-slate-500">
+      <div className="flex items-center gap-4 text-lightBlack">
         <p>
           <span>🎞️</span>0 movies
         </p>
