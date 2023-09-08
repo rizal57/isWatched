@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import {
   Box,
   MovieList,
   Navbar,
+  NumResults,
+  Search,
   WatchedMovieLists,
   WatchedSummary,
 } from './components';
@@ -49,17 +52,22 @@ const tempWatchedData = [
       'https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
     runtime: 116,
     imdbRating: 8.5,
-    userRating: 9,
+    userRating: 8,
   },
 ];
 
 export default function App() {
+  const [query, setQuery] = useState('');
+
   return (
     <div className="p-2 h-screen">
-      <Navbar />
+      <Navbar>
+        <Search query={query} setQuery={setQuery} />
+        <NumResults movies={tempMovieData} />
+      </Navbar>
       <main className="h-[calc(100vh-100px)]">
         <Box>
-          <WatchedSummary />
+          <WatchedSummary movies={tempWatchedData} />
           <WatchedMovieLists movies={tempWatchedData} />
         </Box>
 

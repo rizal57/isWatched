@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function WatchedMovie({ movie }) {
   return (
     <div className="w-full p-2 mb-2 flex gap-3 border-b border-gray relative">

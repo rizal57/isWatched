@@ -1,4 +1,12 @@
-export default function WatchedSummary() {
+function average(arr) {
+  return arr.reduce((acc, cur) => (acc + cur) / arr.length);
+}
+
+export default function WatchedSummary({ movies }) {
+  const avgImdbRating = average(movies.map((movie) => movie.imdbRating));
+  const avgUserRating = average(movies.map((movie) => movie.userRating));
+  const avgRuntime = average(movies.map((movie) => movie.runtime));
+
   return (
     <div className="bg-gray shadow-md p-2">
       <h2 className="font-semibold text-black text-[1rem]">
@@ -6,16 +14,20 @@ export default function WatchedSummary() {
       </h2>
       <div className="flex items-center gap-4 text-lightBlack">
         <p>
-          <span>🎞️</span>0 movies
+          <span>🎞️ </span>
+          {movies.length} movies
         </p>
         <p>
-          <span>⭐</span>0.00
+          <span>⭐</span>
+          {avgImdbRating.toFixed(2)}
         </p>
         <p>
-          <span>🌟</span>0.00
+          <span>🌟</span>
+          {avgUserRating.toFixed(2)}
         </p>
         <p>
-          <span>⏲️</span>130 min
+          <span>⏲️</span>
+          {avgRuntime} min
         </p>
       </div>
     </div>

@@ -1,7 +1,9 @@
-export default function NumResults() {
+export default function NumResults({ movies }) {
   return (
     <div>
-      <span className="font-semibold text-[16px]">Found 10 results</span>
+      <span className="font-semibold text-[16px]">
+        Found {movies.length} results
+      </span>
     </div>
   );
 }

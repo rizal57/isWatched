@@ -3,5 +3,17 @@ import Box from './Box';
 import WatchedSummary from './WatchedSummary';
 import WatchedMovieLists from './WatchedMovieLists';
 import MovieList from './MovieList';
+import Logo from './Logo';
+import NumResults from './NumResults';
+import Search from './Search';
 
-export { Navbar, Box, WatchedSummary, WatchedMovieLists, MovieList };
+export {
+  Navbar,
+  Box,
+  WatchedSummary,
+  WatchedMovieLists,
+  MovieList,
+  Logo,
+  NumResults,
+  Search,
+};
