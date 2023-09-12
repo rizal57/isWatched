@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const KEY = 'f6db18';
 
-function DetailMovie({ selectedId }) {
+function DetailMovie({ selectedId, setSelectedId }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,8 +56,14 @@ function DetailMovie({ selectedId }) {
     );
 
   return (
-    <div className="p-4 rounded-xl shadow-md m-4">
-      <div className="flex gap-3 mb-3">
+    <div className="p-4 rounded-xl shadow-md m-4 relative">
+      <button
+        onClick={() => setSelectedId(null)}
+        className="absolute top-1 left-1 z-10 p-1 rounded-full w-5 h-5 flex items-center justify-center bg-black text-white"
+      >
+        &larr;
+      </button>
+      <div className="flex gap-3 my-3">
         <img
           src={poster}
           alt={title}

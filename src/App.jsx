@@ -112,7 +112,10 @@ export default function App() {
       <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">
         <Box>
           {selectedId ? (
-            <DetailMovie selectedId={selectedId} />
+            <DetailMovie
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
+            />
           ) : (
             <>
               <WatchedSummary movies={watched} />
