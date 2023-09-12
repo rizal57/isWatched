@@ -6,7 +6,7 @@ const KEY = 'f6db18';
 function DetailMovie({ selectedId }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
-  console.log(movieDetail);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     Title: title,
@@ -30,6 +30,7 @@ function DetailMovie({ selectedId }) {
   useEffect(() => {
     async function getDetailMovie() {
       try {
+        setIsLoading(true);
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
         );
@@ -39,11 +40,21 @@ function DetailMovie({ selectedId }) {
         setMovieDetail(data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
     getDetailMovie();
   }, [selectedId]);
+
+  if (isLoading)
+    return (
+      <p className="text-center mt-10 text-blue font-semibold text-xl">
+        Loading...
+      </p>
+    );
+
   return (
     <div className="p-4 rounded-xl shadow-md m-4">
       <div className="flex gap-3 mb-3">
