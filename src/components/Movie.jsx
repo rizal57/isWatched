@@ -1,6 +1,9 @@
-export default function Movie({ movie }) {
+export default function Movie({ movie, onSelected }) {
   return (
-    <div className="w-full py-2 px-4 hover:bg-lightGray cursor-pointer transition duration-300 ease-out mb-2 flex gap-3 border-b border-gray relative">
+    <div
+      onClick={() => onSelected(movie.imdbID)}
+      className="w-full py-2 px-4 hover:bg-lightGray cursor-pointer transition duration-300 ease-out mb-2 flex gap-3 border-b border-gray relative"
+    >
       <img
         src={movie.Poster}
         alt={movie.Title}

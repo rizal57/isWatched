@@ -11,6 +11,7 @@ import {
   WatchedSummary,
 } from './components';
 import { useEffect } from 'react';
+import DetailMovie from './components/DetailMovie';
 
 const tempMovieData = [
   {
@@ -67,6 +68,11 @@ export default function App() {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleSelectedId(id) {
+    setSelectedId((selected) => (selected === id ? null : id));
+  }
 
   useEffect(() => {
     async function getMovies() {
@@ -105,8 +111,14 @@ export default function App() {
       </Navbar>
       <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">
         <Box>
-          <WatchedSummary movies={watched} />
-          <WatchedMovieLists movies={watched} />
+          {selectedId ? (
+            <DetailMovie selectedId={selectedId} />
+          ) : (
+            <>
+              <WatchedSummary movies={watched} />
+              <WatchedMovieLists movies={watched} />
+            </>
+          )}
         </Box>
 
         <Box height="h-[calc(100vh-300px)] sm:h-[calc(100vh-100px)]">
@@ -115,7 +127,7 @@ export default function App() {
           ) : error ? (
             <ErrorMessage message={error} />
           ) : (
-            <MovieList movies={movies} />
+            <MovieList movies={movies} onSelected={handleSelectedId} />
           )}
         </Box>
       </main>
