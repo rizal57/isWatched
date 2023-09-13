@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import StarRating from './StarRating';
 
 const KEY = 'f6db18';
 
@@ -81,11 +81,16 @@ function DetailMovie({ selectedId, setSelectedId }) {
           <div className="mt-3 flex gap-2 items-center">
             <div className="border border-lightGray shadow-sm p-2 w-16 h-16 rounded-md">
               <p className="text-sm text-darkWhite">IMDb</p>
-              <p className="text-2xl font-bold text-orange">{imdbRating}</p>
+              <p className="text-2xl font-bold text-yellow">{imdbRating}</p>
+            </div>
+            <div className="border border-lightGray shadow-sm p-2 w-fit h-16 rounded-md">
+              <p className="text-sm text-darkWhite">Your Rated</p>
+              <p className="text-2xl font-bold text-yellow">{imdbRating}</p>
             </div>
           </div>
         </div>
       </div>
+      <StarRating />
       {/* plot */}
       <div className="mb-3">
         <p className="text-base text-lightBlack leading-relaxed">
