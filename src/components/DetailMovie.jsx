@@ -3,7 +3,7 @@ import StarRating from './StarRating';
 
 const KEY = 'f6db18';
 
-function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
+function DetailMovie({ selectedId, onClose, onAddWatched }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,12 +38,7 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
       runtime: Number(runtime.split(' ').at(0)),
     };
     onAddWatched(newMovie);
-    handleClose();
-  }
-
-  function handleClose() {
-    setSelectedId(null);
-    setUserRating('');
+    onClose();
   }
 
   useEffect(() => {
@@ -77,7 +72,7 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
   return (
     <div className="p-4 rounded-xl shadow-md m-4 relative">
       <button
-        onClick={handleClose}
+        onClick={onClose}
         className="absolute top-1 left-1 z-10 p-1 rounded-full w-5 h-5 flex items-center justify-center bg-black text-white"
       >
         &larr;
@@ -102,18 +97,12 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
               <p className="text-sm text-darkWhite">IMDb</p>
               <p className="text-2xl font-bold text-yellow">{imdbRating}</p>
             </div>
-            {userRating && (
-              <div className="border border-lightGray shadow-sm p-2 w-fit h-16 rounded-md">
-                <p className="text-sm text-darkWhite">Your Rated</p>
-                <p className="text-2xl font-bold text-yellow">{userRating}</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
       <StarRating maxRating={10} onRating={setUserRating} />
       <div className="w-full flex items-center justify-center">
-        {userRating && (
+        {userRating > 0 && (
           <button
             className="py-1 px-3 rounded-md bg-blue text-white hover:bg-lightBlack"
             onClick={handleAdd}

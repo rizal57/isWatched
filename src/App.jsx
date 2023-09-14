@@ -78,6 +78,10 @@ export default function App() {
     setWatched((movies) => [...movies, movie]);
   }
 
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
+
   function handleDeleteWatched(id) {
     setWatched((movies) => movies.filter((movie) => movie.imdbID !== id));
   }
@@ -135,7 +139,7 @@ export default function App() {
           {selectedId ? (
             <DetailMovie
               selectedId={selectedId}
-              setSelectedId={setSelectedId}
+              onClose={handleCloseMovie}
               onAddWatched={handleAddWatched}
             />
           ) : (
