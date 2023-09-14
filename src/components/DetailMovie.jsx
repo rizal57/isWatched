@@ -7,6 +7,7 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState('');
 
   const {
     Title: title,
@@ -32,6 +33,7 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
       imdbID: selectedId,
       title,
       poster,
+      userRating,
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(' ').at(0)),
     };
@@ -41,6 +43,7 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
 
   function handleClose() {
     setSelectedId(null);
+    setUserRating('');
   }
 
   useEffect(() => {
@@ -99,21 +102,25 @@ function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
               <p className="text-sm text-darkWhite">IMDb</p>
               <p className="text-2xl font-bold text-yellow">{imdbRating}</p>
             </div>
-            <div className="border border-lightGray shadow-sm p-2 w-fit h-16 rounded-md">
-              <p className="text-sm text-darkWhite">Your Rated</p>
-              <p className="text-2xl font-bold text-yellow">{imdbRating}</p>
-            </div>
+            {userRating && (
+              <div className="border border-lightGray shadow-sm p-2 w-fit h-16 rounded-md">
+                <p className="text-sm text-darkWhite">Your Rated</p>
+                <p className="text-2xl font-bold text-yellow">{userRating}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <StarRating />
+      <StarRating maxRating={10} onRating={setUserRating} />
       <div className="w-full flex items-center justify-center">
-        <button
-          className="py-2 px-4 rounded-md bg-blue text-white"
-          onClick={handleAdd}
-        >
-          Add
-        </button>
+        {userRating && (
+          <button
+            className="py-1 px-3 rounded-md bg-blue text-white hover:bg-lightBlack"
+            onClick={handleAdd}
+          >
+            + Add to watched list
+          </button>
+        )}
       </div>
       {/* plot */}
       <div className="mb-3">

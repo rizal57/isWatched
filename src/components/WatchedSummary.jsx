@@ -1,5 +1,5 @@
 function average(arr) {
-  return arr.reduce((acc, cur) => (acc + cur) / arr.length, 0);
+  return arr.reduce((acc, cur, index, arr) => acc + cur / arr.length, 0);
 }
 
 export default function WatchedSummary({ movies }) {

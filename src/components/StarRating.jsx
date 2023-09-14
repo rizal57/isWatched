@@ -1,12 +1,19 @@
 import { useState } from 'react';
 import Star from './Star';
 
-function StarRating({ color = '#fcc419', size = 24 }) {
-  const [rating, setRating] = useState(0);
+function StarRating({
+  color = '#fcc419',
+  size = 24,
+  maxRating = 5,
+  defaultRating = 0,
+  onRating = () => {},
+}) {
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTimeRating] = useState(0);
 
   function handleRating(rate) {
     setRating(rate);
+    onRating(rate);
   }
 
   function handleMouseIn(tempRate) {
@@ -16,7 +23,7 @@ function StarRating({ color = '#fcc419', size = 24 }) {
   return (
     <div className="w-full flex justify-center items-center my-3">
       <div className="flex items-center gap-1 bg-white p-3 rounded-md border border-gray w-fit">
-        {Array.from({ length: 10 }, (_, i) => (
+        {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
             index={i}
