@@ -3,7 +3,7 @@ import StarRating from './StarRating';
 
 const KEY = 'f6db18';
 
-function DetailMovie({ selectedId, setSelectedId }) {
+function DetailMovie({ selectedId, setSelectedId, onAddWatched }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +26,22 @@ function DetailMovie({ selectedId, setSelectedId }) {
   const displayPlot = togglePlot
     ? plot
     : plot?.split(' ').slice(0, 20).join(' ');
+
+  function handleAdd() {
+    const newMovie = {
+      imdbID: selectedId,
+      title,
+      poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(' ').at(0)),
+    };
+    onAddWatched(newMovie);
+    handleClose();
+  }
+
+  function handleClose() {
+    setSelectedId(null);
+  }
 
   useEffect(() => {
     async function getDetailMovie() {
@@ -58,7 +74,7 @@ function DetailMovie({ selectedId, setSelectedId }) {
   return (
     <div className="p-4 rounded-xl shadow-md m-4 relative">
       <button
-        onClick={() => setSelectedId(null)}
+        onClick={handleClose}
         className="absolute top-1 left-1 z-10 p-1 rounded-full w-5 h-5 flex items-center justify-center bg-black text-white"
       >
         &larr;
@@ -91,6 +107,14 @@ function DetailMovie({ selectedId, setSelectedId }) {
         </div>
       </div>
       <StarRating />
+      <div className="w-full flex items-center justify-center">
+        <button
+          className="py-2 px-4 rounded-md bg-blue text-white"
+          onClick={handleAdd}
+        >
+          Add
+        </button>
+      </div>
       {/* plot */}
       <div className="mb-3">
         <p className="text-base text-lightBlack leading-relaxed">

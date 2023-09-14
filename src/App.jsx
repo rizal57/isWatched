@@ -65,13 +65,17 @@ const KEY = 'f6db18';
 export default function App() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedId, setSelectedId] = useState(null);
 
   function handleSelectedId(id) {
     setSelectedId((selected) => (selected === id ? null : id));
+  }
+
+  function handleAddWatched(movie) {
+    setWatched((movies) => [...movies, movie]);
   }
 
   useEffect(() => {
@@ -128,6 +132,7 @@ export default function App() {
             <DetailMovie
               selectedId={selectedId}
               setSelectedId={setSelectedId}
+              onAddWatched={handleAddWatched}
             />
           ) : (
             <>

@@ -2,13 +2,13 @@ export default function WatchedMovie({ movie }) {
   return (
     <div className="w-full p-2 mb-2 flex gap-3 border-b border-gray relative">
       <img
-        src={movie.Poster}
-        alt={movie.Title}
+        src={movie.poster}
+        alt={movie.title}
         className="w-14 h-16 object-cover rounded-md"
       />
 
       <div>
-        <h1 className="font-semibold text-xl mb-1 text-black">{movie.Title}</h1>
+        <h1 className="font-semibold text-xl mb-1 text-black">{movie.title}</h1>
         <div className="flex items-center gap-4 text-lightBlack">
           <p>
             <span>⭐</span>

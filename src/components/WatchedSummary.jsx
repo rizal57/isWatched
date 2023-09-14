@@ -1,5 +1,5 @@
 function average(arr) {
-  return arr.reduce((acc, cur) => (acc + cur) / arr.length);
+  return arr.reduce((acc, cur) => (acc + cur) / arr.length, 0);
 }
 
 export default function WatchedSummary({ movies }) {
@@ -27,7 +27,7 @@ export default function WatchedSummary({ movies }) {
         </p>
         <p>
           <span>⏲️</span>
-          {avgRuntime} min
+          {avgRuntime.toFixed(2)} min
         </p>
       </div>
     </div>
