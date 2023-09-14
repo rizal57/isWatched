@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import StarRating from './StarRating';
+import BoxUserRating from './BoxUserRating';
 
 const KEY = 'f6db18';
 
@@ -67,6 +68,8 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     }
 
     getDetailMovie();
+
+    return () => setUserRating('');
   }, [selectedId]);
 
   if (isLoading)
@@ -107,19 +110,19 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
           </div>
         </div>
       </div>
-      {hasWatched ? (
-        <div className="bg-white p-2 rounded-md border border-gray my-3">
-          <p className="text-lightBlack text-center">
-            You rated with {wathcedUser} <span>⭐</span>
-          </p>
-        </div>
-      ) : (
-        <>
-          <div className="bg-white p-2 rounded-md border border-gray my-3">
+      <div className="flex items-center justify-center">
+        {hasWatched ? (
+          <BoxUserRating>
+            <p className="text-lightBlack text-center">
+              You rated with {wathcedUser} <span>⭐</span>
+            </p>
+          </BoxUserRating>
+        ) : (
+          <BoxUserRating>
             <StarRating maxRating={10} onRating={setUserRating} />
-          </div>
-        </>
-      )}
+          </BoxUserRating>
+        )}
+      </div>
       <div className="w-full flex items-center justify-center">
         {userRating > 0 && (
           <button
