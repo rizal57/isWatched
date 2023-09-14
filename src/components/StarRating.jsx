@@ -21,8 +21,8 @@ function StarRating({
   }
 
   return (
-    <div className="w-full flex justify-center items-center my-3">
-      <div className="flex items-center gap-1 bg-white p-3 rounded-md border border-gray w-fit">
+    <div className="w-full flex justify-center items-center">
+      <div className="flex items-center gap-1 w-full">
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
@@ -35,6 +35,9 @@ function StarRating({
             size={size}
           />
         ))}
+        <p className="text-yellow ml-3 font-semibold text-base">
+          {tempRating ? tempRating : rating}
+        </p>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import StarRating from './StarRating';
 
 const KEY = 'f6db18';
 
-function DetailMovie({ selectedId, onClose, onAddWatched }) {
+function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +28,14 @@ function DetailMovie({ selectedId, onClose, onAddWatched }) {
     ? plot
     : plot?.split(' ').slice(0, 20).join(' ');
 
+  const hasWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+  const wathcedUser = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
+
   function handleAdd() {
+    if (hasWatched) return;
+
     const newMovie = {
       imdbID: selectedId,
       title,
@@ -100,7 +107,19 @@ function DetailMovie({ selectedId, onClose, onAddWatched }) {
           </div>
         </div>
       </div>
-      <StarRating maxRating={10} onRating={setUserRating} />
+      {hasWatched ? (
+        <div className="bg-white p-2 rounded-md border border-gray my-3">
+          <p className="text-lightBlack text-center">
+            You rated with {wathcedUser} <span>⭐</span>
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="bg-white p-2 rounded-md border border-gray my-3">
+            <StarRating maxRating={10} onRating={setUserRating} />
+          </div>
+        </>
+      )}
       <div className="w-full flex items-center justify-center">
         {userRating > 0 && (
           <button
