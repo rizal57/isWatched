@@ -24,6 +24,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     Country: country,
     imdbRating,
   } = movieDetail;
+  console.log(movieDetail);
 
   const displayPlot = togglePlot
     ? plot
@@ -42,7 +43,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
       title,
       poster,
       userRating,
-      imdbRating: Number(imdbRating),
+      imdbRating: imdbRating === 'N/A' ? '' : Number(imdbRating),
       runtime: Number(runtime.split(' ').at(0)),
     };
     onAddWatched(newMovie);

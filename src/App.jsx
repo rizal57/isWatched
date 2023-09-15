@@ -107,7 +107,6 @@ export default function App() {
         setMovies(data.Search);
       } catch (err) {
         if (err.name !== 'AbortError') {
-          console.log(err);
           setError(err.message);
         }
       } finally {
@@ -159,13 +158,11 @@ export default function App() {
         </Box>
 
         <Box height="h-[calc(100vh-300px)] sm:h-[calc(100vh-100px)]">
-          {isLoading ? (
-            <Loader />
-          ) : error ? (
-            <ErrorMessage message={error} />
-          ) : (
+          {isLoading && <Loader />}
+          {!isLoading && !error && (
             <MovieList movies={movies} onSelected={handleSelectedId} />
           )}
+          {error && <ErrorMessage message={error} />}
         </Box>
       </main>
     </div>
