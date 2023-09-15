@@ -131,7 +131,11 @@ export default function App() {
   return (
     <div className="p-2 h-screen max-w-5xl mx-auto">
       <Navbar>
-        <Search query={query} setQuery={setQuery} />
+        <Search
+          query={query}
+          setQuery={setQuery}
+          setSelectedId={setSelectedId}
+        />
         <NumResults movies={movies} />
       </Navbar>
       <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">

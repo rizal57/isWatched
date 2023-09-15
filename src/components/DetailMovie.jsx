@@ -72,6 +72,20 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     return () => setUserRating('');
   }, [selectedId]);
 
+  useEffect(() => {
+    document.title = `Movie | ${title}`;
+
+    return () => (document.title = 'isWatched');
+  }, [title]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    });
+  }, []);
+
   if (isLoading)
     return (
       <p className="text-center mt-10 text-blue font-semibold text-xl">
