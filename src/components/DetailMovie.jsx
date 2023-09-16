@@ -24,7 +24,6 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     Country: country,
     imdbRating,
   } = movieDetail;
-  console.log(movieDetail);
 
   const displayPlot = togglePlot
     ? plot
@@ -69,8 +68,6 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     }
 
     getDetailMovie();
-
-    return () => setUserRating('');
   }, [selectedId]);
 
   useEffect(() => {
