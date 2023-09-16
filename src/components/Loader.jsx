@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <p className="text-black font-semibold text-xl text-center my-3">
+    <p className="text-center mt-10 text-blue font-semibold text-xl">
       Loading...
     </p>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import StarRating from './StarRating';
 import BoxUserRating from './BoxUserRating';
+import Loader from './Loader';
 
 const KEY = 'f6db18';
 
@@ -84,12 +85,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     });
   }, []);
 
-  if (isLoading)
-    return (
-      <p className="text-center mt-10 text-blue font-semibold text-xl">
-        Loading...
-      </p>
-    );
+  if (isLoading) return <Loader />;
 
   return (
     <div className="p-4 rounded-xl shadow-md m-4 relative">
