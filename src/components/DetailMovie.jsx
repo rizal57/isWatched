@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import StarRating from './StarRating';
 import BoxUserRating from './BoxUserRating';
+import Loader from './Loader';
 
 const KEY = 'f6db18';
 
@@ -42,7 +43,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
       title,
       poster,
       userRating,
-      imdbRating: Number(imdbRating),
+      imdbRating: imdbRating === 'N/A' ? '' : Number(imdbRating),
       runtime: Number(runtime.split(' ').at(0)),
     };
     onAddWatched(newMovie);
@@ -68,16 +69,23 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
     }
 
     getDetailMovie();
-
-    return () => setUserRating('');
   }, [selectedId]);
 
-  if (isLoading)
-    return (
-      <p className="text-center mt-10 text-blue font-semibold text-xl">
-        Loading...
-      </p>
-    );
+  useEffect(() => {
+    document.title = `Movie | ${title}`;
+
+    return () => (document.title = 'isWatched');
+  }, [title]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    });
+  }, []);
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="p-4 rounded-xl shadow-md m-4 relative">

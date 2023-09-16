@@ -65,10 +65,14 @@ const KEY = 'f6db18';
 export default function App() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedWatched = localStorage.getItem('watched');
+    return storedWatched ? JSON.parse(storedWatched) : [];
+  });
 
   function handleSelectedId(id) {
     setSelectedId((selected) => (selected === id ? null : id));
@@ -85,6 +89,10 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((movies) => movies.filter((movie) => movie.imdbID !== id));
   }
+
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify(watched));
+  }, [watched]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -107,7 +115,6 @@ export default function App() {
         setMovies(data.Search);
       } catch (err) {
         if (err.name !== 'AbortError') {
-          console.log(err);
           setError(err.message);
         }
       } finally {
@@ -131,7 +138,11 @@ export default function App() {
   return (
     <div className="p-2 h-screen max-w-5xl mx-auto">
       <Navbar>
-        <Search query={query} setQuery={setQuery} />
+        <Search
+          query={query}
+          setQuery={setQuery}
+          setSelectedId={setSelectedId}
+        />
         <NumResults movies={movies} />
       </Navbar>
       <main className="h-[calc(100vh-80px)] flex sm:flex-row-reverse flex-col sm:gap-3">
@@ -142,6 +153,7 @@ export default function App() {
               onClose={handleCloseMovie}
               onAddWatched={handleAddWatched}
               watched={watched}
+              key={selectedId}
             />
           ) : (
             <>
@@ -155,13 +167,11 @@ export default function App() {
         </Box>
 
         <Box height="h-[calc(100vh-300px)] sm:h-[calc(100vh-100px)]">
-          {isLoading ? (
-            <Loader />
-          ) : error ? (
-            <ErrorMessage message={error} />
-          ) : (
+          {isLoading && <Loader />}
+          {!isLoading && !error && (
             <MovieList movies={movies} onSelected={handleSelectedId} />
           )}
+          {error && <ErrorMessage message={error} />}
         </Box>
       </main>
     </div>
