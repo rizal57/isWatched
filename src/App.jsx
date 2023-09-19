@@ -45,7 +45,7 @@ export default function App() {
         href="https://github.com/rizal57/isWatched"
         target="_blank"
         rel="noreferrer"
-        className="absolute bottom-5 right-4 z-50 bg-white hover:shadow-xl hover:-translate-y-1 transition-all ease-out duration-300 shadow-md p-1 rounded-full w-8 h-8"
+        className="fixed bottom-5 right-5 z-50 bg-white hover:shadow-xl transition-all ease-out duration-300 shadow-sm p-1 rounded-full w-8 h-8 animate-bounce"
       >
         <img src="/github.png" alt="Github" />
       </a>
