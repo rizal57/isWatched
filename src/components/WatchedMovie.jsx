@@ -1,6 +1,6 @@
 export default function WatchedMovie({ movie, onDelete }) {
   return (
-    <div className="w-full p-2 pr-6 mb-2 flex gap-3 border-b border-gray relative">
+    <li className="w-full p-2 pr-6 mb-2 flex gap-3 border-b border-gray relative">
       <img
         src={movie.poster}
         alt={movie.title}
@@ -31,6 +31,6 @@ export default function WatchedMovie({ movie, onDelete }) {
       >
         X
       </button>
-    </div>
+    </li>
   );
 }
