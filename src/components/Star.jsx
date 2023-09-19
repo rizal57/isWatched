@@ -1,7 +1,7 @@
 function Star({ onRate, full, index, color, onMouseIn, onMouseOut, size }) {
   const starStyle = {
-    width: `${size}px`,
-    height: `${size}px`,
+    width: `${size}rem`,
+    height: `${size}rem`,
     display: 'block',
     cursor: 'pointer',
   };

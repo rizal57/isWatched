@@ -3,7 +3,7 @@ import Star from './Star';
 
 function StarRating({
   color = '#fcc419',
-  size = 24,
+  size = 1.2,
   maxRating = 5,
   defaultRating = 0,
   onRating = () => {},

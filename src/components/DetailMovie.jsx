@@ -99,16 +99,14 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
         <img
           src={poster}
           alt={title}
-          width={150}
-          height={150}
-          className="rounded-xl object-cover"
+          className="w-32 h-36 md:w-40 md:h-48 rounded-xl object-cover"
         />
         <div>
-          <h1 className="text-3xl font-bold text-black">{title}</h1>
-          <div className="flex items-center gap-2 text-xs text-lightBlack mt-2">
-            <p>{rated}</p>
-            <p>{runtime}</p>
-            <p>{genre?.split(',')?.join('/')}</p>
+          <h1 className="md:text-3xl text-xl font-bold text-black">{title}</h1>
+          <div className="flex items-start md:gap-2 gap-1 text-lightBlack mt-2">
+            <p className="text-xs md:text-sm w-14">{rated}</p>
+            <p className="text-xs md:text-sm w-16">{runtime}</p>
+            <p className="text-xs md:text-sm">{genre?.split(',')?.join('/')}</p>
           </div>
           <div className="mt-3 flex gap-2 items-center">
             <div className="border border-lightGray shadow-sm p-2 w-16 h-16 rounded-md">
@@ -142,7 +140,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
         )}
       </div>
       {/* plot */}
-      <div className="mb-3">
+      <div className="my-3">
         <p className="text-base text-lightBlack leading-relaxed">
           <em>{displayPlot} </em>
           <span
@@ -161,7 +159,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
       {/* released date */}
       <div>
         <h5 className="text-darkWhite">Release date</h5>
-        <p className="text-xl text-black font-semibold">
+        <p className="md:text-xl text-lg text-black font-semibold">
           {released} ({country})
         </p>
       </div>
