@@ -6,7 +6,7 @@ export default function Search({ query, setQuery, setSelectedId }) {
 
   useEffect(() => {
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
+      if (e.key === 'Control') {
         searchRef.current.focus();
         setQuery('');
         setSelectedId(null);
@@ -17,7 +17,7 @@ export default function Search({ query, setQuery, setSelectedId }) {
   return (
     <div className="md:w-[40%] w-[43%] relative">
       <div className="absolute hidden md:block right-2 top-[50%] -translate-y-[50%]">
-        <p className="text-darkWhite font-semibold">Enter</p>
+        <p className="text-darkWhite font-semibold">Ctrl</p>
       </div>
       <input
         ref={searchRef}
