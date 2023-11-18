@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useMovies } from '../context/MovieContext';
 
-export default function Search({ query, setQuery, setSelectedId }) {
+export default function Search() {
+  const { query, setQuery, setSelectedId } = useMovies();
   const searchRef = useRef(null);
 
   useEffect(() => {

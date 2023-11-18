@@ -1,8 +1,12 @@
+import { useMovies } from '../context/MovieContext';
+
 function average(arr) {
   return arr.reduce((acc, cur, index, arr) => acc + cur / arr.length, 0);
 }
 
-export default function WatchedSummary({ movies }) {
+export default function WatchedSummary() {
+  const { movies } = useMovies();
+
   const avgImdbRating = average(movies.map((movie) => movie.imdbRating));
   const avgUserRating = average(movies.map((movie) => movie.userRating));
   const avgRuntime = average(movies.map((movie) => movie.runtime));

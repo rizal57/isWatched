@@ -1,4 +1,8 @@
-export default function WatchedMovie({ movie, onDelete }) {
+import { useMovies } from '../context/MovieContext';
+
+export default function WatchedMovie({ movie }) {
+  const { handleDeleteWatched } = useMovies();
+
   return (
     <li className="w-full p-2 pr-6 mb-2 flex gap-3 border-b border-gray relative">
       <img
@@ -26,7 +30,7 @@ export default function WatchedMovie({ movie, onDelete }) {
       </div>
 
       <button
-        onClick={() => onDelete(movie.imdbID)}
+        onClick={() => handleDeleteWatched(movie.imdbID)}
         className="w-5 h-5 aspect-square text-[.9rem] font-semibold absolute top-2 right-2 rounded-full bg-red text-white hover:bg-darkRed transition-all duration-300 ease-out"
       >
         X

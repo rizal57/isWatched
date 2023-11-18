@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react';
 import StarRating from './StarRating';
 import BoxUserRating from './BoxUserRating';
 import Loader from './Loader';
+import { useMovies } from '../context/MovieContext';
 
 const KEY = 'f6db18';
 
-function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
+function DetailMovie() {
   const [movieDetail, setMovieDetail] = useState({});
   const [togglePlot, setTogglePlot] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState('');
+
+  const { selectedId, handleCloseMovie, handleAddWatched, watched } =
+    useMovies();
 
   const {
     Title: title,
@@ -46,8 +50,8 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
       imdbRating: imdbRating === 'N/A' ? '' : Number(imdbRating),
       runtime: Number(runtime.split(' ').at(0)),
     };
-    onAddWatched(newMovie);
-    onClose();
+    handleAddWatched(newMovie);
+    handleCloseMovie();
   }
 
   useEffect(() => {
@@ -80,7 +84,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
   useEffect(() => {
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        onClose();
+        handleCloseMovie();
       }
     });
   }, []);
@@ -90,7 +94,7 @@ function DetailMovie({ selectedId, onClose, onAddWatched, watched }) {
   return (
     <div className="p-4 rounded-xl shadow-md m-4 relative">
       <button
-        onClick={onClose}
+        onClick={handleCloseMovie}
         className="absolute top-1 left-1 z-10 p-1 rounded-full w-5 h-5 flex items-center justify-center bg-black text-white"
       >
         &larr;
